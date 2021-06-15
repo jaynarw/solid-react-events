@@ -29,6 +29,32 @@ function goPrevMonth(
     setMonth(month - 1);
   }
 }
+function goNextMonth(
+  month: number,
+  year: number,
+  setter: {
+    setMonth: React.Dispatch<React.SetStateAction<number>>;
+    setYear: React.Dispatch<React.SetStateAction<number>>;
+  }
+) {
+  const { setMonth, setYear } = setter;
+  if (month === 12) {
+    setMonth(1);
+    setYear(year + 1);
+  } else {
+    setMonth(month + 1);
+  }
+}
+
+function goToday(setter: {
+  setMonth: React.Dispatch<React.SetStateAction<number>>;
+  setYear: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  console.log("this ran");
+  const { setMonth, setYear } = setter;
+  setMonth(dayjs().month() + 1);
+  setYear(dayjs().year());
+}
 
 export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
   return (
@@ -46,8 +72,8 @@ export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
         <Button onClick={() => goPrevMonth(month, year, setter)}>
           <MdNavigateBefore fontSize={32} />
         </Button>
-        <Button>Today</Button>
-        <Button>
+        <Button onClick={() => goToday(setter)}>Today</Button>
+        <Button onClick={() => goNextMonth(month, year, setter)}>
           <MdNavigateNext fontSize={32} />
         </Button>
       </div>

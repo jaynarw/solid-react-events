@@ -8,9 +8,14 @@ export interface ButtonProps
   className?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, className }) => {
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <button type="button" className={cn(styles.button, className)}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <button type="button" className={cn(styles.button, className)} {...props}>
       {children}
     </button>
   );
