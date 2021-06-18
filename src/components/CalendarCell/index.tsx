@@ -26,8 +26,11 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
           className={cn(styles.calendarCellText, {
             [styles.thisMonth]: date.month() + 1 === displayMonth,
           })}
+          style={{
+            width: date.date() === 1 ? "auto" : undefined,
+          }}
         >
-          {date.format("DD")}
+          {date.date() === 1 ? date.format("DD MMM") : date.format("DD")}
         </div>
         {/* <div>
           <div className="mbsc-calendar-labels"></div>

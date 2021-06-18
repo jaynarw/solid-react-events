@@ -50,7 +50,6 @@ function goToday(setter: {
   setMonth: React.Dispatch<React.SetStateAction<number>>;
   setYear: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  console.log("this ran");
   const { setMonth, setYear } = setter;
   setMonth(dayjs().month() + 1);
   setYear(dayjs().year());
