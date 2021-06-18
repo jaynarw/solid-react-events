@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from "react";
 import dayjs from "dayjs";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
@@ -7,52 +8,36 @@ import styles from "./styles.module.css";
 export interface HeaderProps {
   month: number;
   year: number;
-  setter: {
-    setMonth: React.Dispatch<React.SetStateAction<number>>;
-    setYear: React.Dispatch<React.SetStateAction<number>>;
-  };
+  setter: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
 }
 
-function goPrevMonth(
+function updateDate(
   month: number,
   year: number,
-  setter: {
-    setMonth: React.Dispatch<React.SetStateAction<number>>;
-    setYear: React.Dispatch<React.SetStateAction<number>>;
-  }
+  setter: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>,
+  updateType: "previous" | "next" | "today"
 ) {
-  const { setMonth, setYear } = setter;
-  if (month === 1) {
-    setMonth(12);
-    setYear(year - 1);
-  } else {
-    setMonth(month - 1);
+  let updatedMonth = month;
+  let updatedYear = year;
+  switch (updateType) {
+    case "previous":
+      if (month === 1) {
+        updatedMonth = 12;
+        updatedYear -= 1;
+      }
+      return setter(dayjs(new Date(updatedYear, updatedMonth, 1)));
+    case "next":
+      if (month === 12) {
+        updatedMonth = 1;
+        updatedYear += 1;
+      }
+      return setter(dayjs(new Date(updatedYear, updatedMonth, 1)));
+    case "today":
+      return setter(dayjs());
+    default:
+      return setter(dayjs());
+    // Do Nothing
   }
-}
-function goNextMonth(
-  month: number,
-  year: number,
-  setter: {
-    setMonth: React.Dispatch<React.SetStateAction<number>>;
-    setYear: React.Dispatch<React.SetStateAction<number>>;
-  }
-) {
-  const { setMonth, setYear } = setter;
-  if (month === 12) {
-    setMonth(1);
-    setYear(year + 1);
-  } else {
-    setMonth(month + 1);
-  }
-}
-
-function goToday(setter: {
-  setMonth: React.Dispatch<React.SetStateAction<number>>;
-  setYear: React.Dispatch<React.SetStateAction<number>>;
-}) {
-  const { setMonth, setYear } = setter;
-  setMonth(dayjs().month() + 1);
-  setYear(dayjs().year());
 }
 
 export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
@@ -68,11 +53,13 @@ export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
         <Button className={styles.tagButton}>Year</Button>
       </div>
       <div className={styles.buttonGroup}>
-        <Button onClick={() => goPrevMonth(month, year, setter)}>
+        <Button onClick={() => updateDate(month, year, setter, "previous")}>
           <MdNavigateBefore fontSize={32} />
         </Button>
-        <Button onClick={() => goToday(setter)}>Today</Button>
-        <Button onClick={() => goNextMonth(month, year, setter)}>
+        <Button onClick={() => updateDate(month, year, setter, "today")}>
+          Today
+        </Button>
+        <Button onClick={() => updateDate(month, year, setter, "next")}>
           <MdNavigateNext fontSize={32} />
         </Button>
       </div>
