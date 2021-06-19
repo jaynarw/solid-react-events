@@ -8,7 +8,16 @@ export interface ContentProps {
   year: number;
 }
 
-const { weekdays } = dayjs[dayjs.locale()];
+const daysInWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
 export const Content: React.FC<ContentProps> = ({ month, year }) => {
   const firstDayOfMonth = dayjs(`${year}-${month}-01`);
   const weekday = firstDayOfMonth.day();
@@ -20,7 +29,7 @@ export const Content: React.FC<ContentProps> = ({ month, year }) => {
     <div className={styles.content}>
       <div role="grid" className={styles.calendarTable}>
         <div className={styles.calendarWeekDays}>
-          {weekdays.map((day: string) => (
+          {daysInWeek.map((day: string) => (
             <div aria-label={day} className={styles.calendarWeekDay}>
               {day.slice(0, 3)}
             </div>
