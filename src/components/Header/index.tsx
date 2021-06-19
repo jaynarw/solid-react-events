@@ -4,63 +4,33 @@ import dayjs from "dayjs";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { Button } from "../Button";
 import styles from "./styles.module.css";
+import updateDate from "./updateDate";
+import { displayTypeType } from "../CalendarContainer/types";
 
 export interface HeaderProps {
   month: number;
   year: number;
-  setter: React.Dispatch<
-    React.SetStateAction<{
-      month: number;
-      year: number;
-      lastUpdateType: string;
-    }>
-  >;
+  setter: {
+    setMonthViewContext: React.Dispatch<
+      React.SetStateAction<{
+        month: number;
+        year: number;
+      }>
+    >;
+    setSelectedDate: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+  };
+  displayType: displayTypeType;
+  setDisplayType: React.Dispatch<React.SetStateAction<displayTypeType>>;
 }
 
-function updateDate(
-  month: number,
-  year: number,
-  setter: React.Dispatch<
-    React.SetStateAction<{
-      month: number;
-      year: number;
-      lastUpdateType: string;
-    }>
-  >,
-  updateType: "previous" | "next" | "today"
-) {
-  let updatedMonth = month;
-  let updatedYear = year;
-  let lastUpdateType = "month";
-  const today = dayjs();
-  // eslint-disable-next-line default-case
-  switch (updateType) {
-    case "previous":
-      if (month === 1) {
-        updatedMonth = 12;
-        updatedYear -= 1;
-      } else {
-        updatedMonth -= 1;
-      }
-      break;
-    case "next":
-      if (month === 12) {
-        updatedMonth = 1;
-        updatedYear += 1;
-      } else {
-        updatedMonth += 1;
-      }
-      break;
-    case "today":
-      updatedMonth = today.month() + 1;
-      updatedYear = today.year();
-      lastUpdateType = "today";
-      break;
-  }
-  return setter({ year: updatedYear, month: updatedMonth, lastUpdateType });
-}
-
-export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
+export const Header: React.FC<HeaderProps> = ({
+  month,
+  year,
+  setter,
+  displayType,
+  setDisplayType,
+}) => {
+  console.log(displayType);
   return (
     <div className={styles.headerWrapper}>
       <h1>
@@ -68,18 +38,35 @@ export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {
       </h1>
       <div className={styles.buttonGroup}>
         <Button className={styles.tagButton}>Day</Button>
-        <Button className={styles.tagButton}>Week</Button>
-        <Button className={styles.tagButton}>Month</Button>
-        <Button className={styles.tagButton}>Year</Button>
+        <Button
+          className={styles.tagButton}
+          onClick={() => setDisplayType("week")}
+        >
+          Week
+        </Button>
+        <Button
+          className={styles.tagButton}
+          onClick={() => setDisplayType("month")}
+        >
+          Month
+        </Button>
       </div>
       <div className={styles.buttonGroup}>
-        <Button onClick={() => updateDate(month, year, setter, "previous")}>
+        <Button
+          onClick={() =>
+            updateDate(month, year, setter, displayType, "previous")
+          }
+        >
           <MdNavigateBefore fontSize={32} />
         </Button>
-        <Button onClick={() => updateDate(month, year, setter, "today")}>
+        <Button
+          onClick={() => updateDate(month, year, setter, displayType, "today")}
+        >
           Today
         </Button>
-        <Button onClick={() => updateDate(month, year, setter, "next")}>
+        <Button
+          onClick={() => updateDate(month, year, setter, displayType, "next")}
+        >
           <MdNavigateNext fontSize={32} />
         </Button>
       </div>
