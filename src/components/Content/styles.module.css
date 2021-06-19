@@ -1,0 +1,35 @@
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.headers {
+    text-align: right;
+    font-weight: 300;
+}
+
+.calendarTable {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.calendarWeekDays {
+    background: #f7f7f7;
+    display: table-row;
+    direction: ltr;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.calendarWeekDay {
+    text-align: right;
+    height: 2.5em;
+    padding: 0 0.5em;
+    line-height: 2.5em;
+    font-size: 1em;
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    display: table-cell;
+}
