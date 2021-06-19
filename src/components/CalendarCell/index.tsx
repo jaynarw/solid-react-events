@@ -19,8 +19,8 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
   const textDate = date.format("dddd, MMMM DD");
   if (!dateContext) return null;
   const {
-    selectedDate: [selectedDate, setSelectedDate],
-    userSelected: [userSelected, setUserSelected],
+    selectedDateState: [selectedDate, setSelectedDate],
+    userSelectedState: [userSelected, setUserSelected],
   } = dateContext;
   const isSelected = userSelected && selectedDate.isSame(date, "day");
   const setDate: () => void = () => {

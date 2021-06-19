@@ -30,13 +30,17 @@ export const Content: React.FC<ContentProps> = ({ month, year }) => {
       <div role="grid" className={styles.calendarTable}>
         <div className={styles.calendarWeekDays}>
           {daysInWeek.map((day: string) => (
-            <div aria-label={day} className={styles.calendarWeekDay}>
+            <div key={day} aria-label={day} className={styles.calendarWeekDay}>
               {day.slice(0, 3)}
             </div>
           ))}
         </div>
         {rowDates.map((date) => (
-          <CalendarRow rowStartDate={date} displayMonth={month} />
+          <CalendarRow
+            key={date.format("DD/MM/YYYY")}
+            rowStartDate={date}
+            displayMonth={month}
+          />
         ))}
       </div>
     </div>

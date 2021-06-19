@@ -8,36 +8,38 @@ import styles from "./styles.module.css";
 export interface HeaderProps {
   month: number;
   year: number;
-  setter: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+  setter: React.Dispatch<React.SetStateAction<{ month: number; year: number }>>;
 }
 
 function updateDate(
   month: number,
   year: number,
-  setter: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>,
+  setter: React.Dispatch<React.SetStateAction<{ month: number; year: number }>>,
   updateType: "previous" | "next" | "today"
 ) {
   let updatedMonth = month;
   let updatedYear = year;
+  const today = dayjs();
+  // eslint-disable-next-line default-case
   switch (updateType) {
     case "previous":
       if (month === 1) {
         updatedMonth = 12;
         updatedYear -= 1;
       }
-      return setter(dayjs(new Date(updatedYear, updatedMonth, 1)));
+      break;
     case "next":
       if (month === 12) {
         updatedMonth = 1;
         updatedYear += 1;
       }
-      return setter(dayjs(new Date(updatedYear, updatedMonth, 1)));
+      break;
     case "today":
-      return setter(dayjs());
-    default:
-      return setter(dayjs());
-    // Do Nothing
+      updatedMonth = today.month() + 1;
+      updatedYear = today.year();
+      break;
   }
+  return setter({ year: updatedYear, month: updatedMonth });
 }
 
 export const Header: React.FC<HeaderProps> = ({ month, year, setter }) => {

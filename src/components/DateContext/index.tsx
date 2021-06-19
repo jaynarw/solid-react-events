@@ -1,29 +1,12 @@
 import dayjs from "dayjs";
-import React, { useState, createContext } from "react";
+import React from "react";
 
-const { Consumer, Provider } = createContext<{
-  selectedDate: [
-    dayjs.Dayjs,
-    React.Dispatch<React.SetStateAction<dayjs.Dayjs>>
-  ];
-  userSelected: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-} | null>(null);
-
-export interface DateContextProps {
-  children: React.ReactNode;
-}
-
-export const DateContext: React.FC<DateContextProps> = ({ children }) => {
-  const selectedDate = useState(dayjs());
-  const userSelected = useState(false);
-  return <Provider value={{ selectedDate, userSelected }}>{children}</Provider>;
-};
-
-export const DateConsumer = Consumer;
 export type DateConsumerProps = {
-  selectedDate: [
+  selectedDateState: [
     dayjs.Dayjs,
     React.Dispatch<React.SetStateAction<dayjs.Dayjs>>
   ];
-  userSelected: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  userSelectedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 } | null;
+
+export const DateContext = React.createContext<DateConsumerProps>(null);
