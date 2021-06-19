@@ -13,13 +13,23 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
   const [monthViewContext, setMonthViewContext] = useState({
     month: today.month() + 1,
     year: today.year(),
+    lastUpdateType: "",
   });
   const selectedDateState = useState(dayjs());
   const userSelectedState = useState(false);
-  const { month, year } = monthViewContext;
+  const { month, year, lastUpdateType } = monthViewContext;
   useEffect(() => {
-    selectedDateState[1](dayjs(new Date(year, month - 1, 1)));
-  }, [month, year]);
+    switch (lastUpdateType) {
+      case "month":
+        selectedDateState[1](dayjs(new Date(year, month - 1, 1)));
+        break;
+      case "today":
+        selectedDateState[1](dayjs());
+        break;
+      default:
+        break;
+    }
+  }, [month, year, lastUpdateType]);
   return (
     <DateContext.Provider value={{ selectedDateState, userSelectedState }}>
       <div className={styles.mainContainer}>
