@@ -1,0 +1,53 @@
+.calendarCell {
+    border-left-style: solid;
+    border-left-width: 1px;
+    background: #fff;
+    border-color: #ccc;
+    color: #000;
+    border-top-style: solid;
+    border-top-width: 1px;
+    max-width: 14.285715%;
+    vertical-align: top;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    display: table-cell;
+    text-align: right;
+    outline: none;
+}
+
+.calendarCellInner {
+    outline: none;
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 1px solid transparent;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.calendarCellText {
+    width: 1.375em;
+    opacity: 0.5;
+    margin: 0.1875em;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 2em;
+    display: inline-block;
+    text-align: center;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.thisMonth {
+    opacity: 1;
+}
+
+.selectedDate {
+    background: rgba(0, 122, 255, 1) !important;
+    color: #fff;
+}

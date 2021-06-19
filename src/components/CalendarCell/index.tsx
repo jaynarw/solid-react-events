@@ -7,7 +7,7 @@ import { DateConsumerProps } from "../DateContext";
 
 export interface CalendarCellProps {
   date: dayjs.Dayjs;
-  displayMonth: ContentProps["month"];
+  displayMonth?: ContentProps["month"];
   dateContext: DateConsumerProps;
 }
 
@@ -45,7 +45,8 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
           className={cn(
             styles.calendarCellText,
             {
-              [styles.thisMonth]: date.month() + 1 === displayMonth,
+              [styles.thisMonth]:
+                displayMonth && date.month() + 1 === displayMonth,
             },
             isSelected && styles.selectedDate
           )}
