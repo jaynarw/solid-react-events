@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import React from "react";
 import { CalendarCell } from "../CalendarCell";
 import { ContentProps } from "../Content";
+import { DateConsumer } from "../DateContext";
 import styles from "./styles.module.css";
 
 export interface CalendarRowProps {
@@ -15,12 +16,20 @@ export const CalendarRow: React.FC<CalendarRowProps> = ({
 }) => {
   return (
     <div role="row" className={styles.calendarRow}>
-      {[...Array(7).keys()].map((i) => (
-        <CalendarCell
-          date={rowStartDate.add(i, "day")}
-          displayMonth={displayMonth}
-        />
-      ))}
+      <DateConsumer>
+        {(props) => {
+          return [...Array(7).keys()].map((i) => {
+            const cellDate = rowStartDate.add(i, "day");
+            return (
+              <CalendarCell
+                date={cellDate}
+                displayMonth={displayMonth}
+                dateContext={props}
+              />
+            );
+          });
+        }}
+      </DateConsumer>
     </div>
   );
 };

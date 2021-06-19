@@ -20,3 +20,10 @@ export const DateContext: React.FC<DateContextProps> = ({ children }) => {
 };
 
 export const DateConsumer = Consumer;
+export type DateConsumerProps = {
+  selectedDate: [
+    dayjs.Dayjs,
+    React.Dispatch<React.SetStateAction<dayjs.Dayjs>>
+  ];
+  userSelected: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+} | null;
