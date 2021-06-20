@@ -23,6 +23,14 @@ const hoursInDay = [...new Array(25).keys()].map((hourInterval) =>
   baseHour.add(hourInterval, "hour").format("h A")
 );
 
+function showMonth(firstDayOfWeek: dayjs.Dayjs, index: number) {
+  if (index === 0) return false;
+  return (
+    firstDayOfWeek.add(index - 1, "day").month() !==
+    firstDayOfWeek.add(index, "day").month()
+  );
+}
+
 export const WeekContent: React.FC<WeekContentProps> = ({ date }) => {
   const weekday = date.day();
   const firstDayOfWeek = date
@@ -33,37 +41,49 @@ export const WeekContent: React.FC<WeekContentProps> = ({ date }) => {
     .add(-weekday, "day");
   return (
     <div className={styles.content}>
-      <div role="grid" className={styles.calendarTable}>
-        <div className={styles.calendarWeekDays}>
-          <div className={styles.calendarWeekDay} />
-          {daysInWeek.map((day: string, index) => (
-            <div key={day} aria-label={day} className={styles.calendarWeekDay}>
-              {day.slice(0, 3)} {firstDayOfWeek.add(index, "day").format("DD")}
-            </div>
-          ))}
-        </div>
-        {hoursInDay.map((hour, hourIndex) => (
-          <div
-            className={cn(
-              styles.calendarRow,
-              hourIndex === 0 && styles.firstRow
-            )}
-          >
-            <div className={styles.calendarCell}>
-              <span className={styles.hourText}>{hour}</span>
-            </div>
+      <table role="grid" className={styles.calendarTable}>
+        <thead className={styles.calendarWeekDays}>
+          <tr className={styles.calendarRow}>
+            <td
+              width="50px"
+              className={cn(styles.calendarWeekDay, styles.calendarColTitle)}
+            />
             {daysInWeek.map((day: string, index) => (
-              <WeekCalendarCell
-                date={
-                  hourIndex !== 0
-                    ? firstDayOfWeek.add(index, "day").add(hourIndex, "hour")
-                    : undefined
-                }
-              />
+              <td key={day} aria-label={day} className={styles.calendarWeekDay}>
+                {day.slice(0, 3)}{" "}
+                {firstDayOfWeek
+                  .add(index, "day")
+                  .format(
+                    `DD ${showMonth(firstDayOfWeek, index) ? "MMM" : ""}`
+                  )}
+              </td>
             ))}
-          </div>
-        ))}
-      </div>
+          </tr>
+        </thead>
+        <tbody className={styles.tbody}>
+          {hoursInDay.map((hour, hourIndex) => (
+            <tr
+              className={cn(
+                styles.calendarRow,
+                hourIndex === 0 && styles.firstRow
+              )}
+            >
+              <td width="50px" className={styles.calendarCell}>
+                <span className={styles.hourText}>{hour}</span>
+              </td>
+              {daysInWeek.map((day: string, index) => (
+                <WeekCalendarCell
+                  date={
+                    hourIndex !== 0
+                      ? firstDayOfWeek.add(index, "day").add(hourIndex, "hour")
+                      : undefined
+                  }
+                />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

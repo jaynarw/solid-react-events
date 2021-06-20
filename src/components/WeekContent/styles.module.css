@@ -4,15 +4,14 @@
 }
 
 .calendarTable {
-    display: table;
-    /* table-layout: fixed; */
+    table-layout: fixed;
     width: 100%;
     height: 100%;
+    border-collapse: collapse;
 }
 
 .calendarWeekDays {
     background: #f7f7f7;
-    display: table-row;
     direction: ltr;
     /* table-layout: fixed; */
     width: 100%;
@@ -26,15 +25,9 @@
     font-size: 1em;
     border-left: 1px solid transparent;
     border-bottom: 1px solid transparent;
-    display: table-cell;
-}
-
-.calendarRow {
-    display: table-row;
 }
 
 .calendarCell {
-    display: table-cell;
     width: 50px;
     position: relative;
 }
@@ -50,4 +43,8 @@
 
 .firstRow {
     line-height: 12px;
+}
+
+.calendarColTitle:first-child {
+    padding: 0;
 }
