@@ -1,17 +1,12 @@
 import React from "react";
 import dayjs from "dayjs";
-import { displayTypeType } from "../CalendarContainer/types";
+import { displayTypeType, monthViewType } from "../CalendarContainer/types";
 
 export default function updateDate(
   month: number,
   year: number,
   setter: {
-    setMonthViewContext: React.Dispatch<
-      React.SetStateAction<{
-        month: number;
-        year: number;
-      }>
-    >;
+    setMonthViewContext: React.Dispatch<React.SetStateAction<monthViewType>>;
     setSelectedDate: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
   },
   displayType: displayTypeType,

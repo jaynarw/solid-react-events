@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import { DateContext } from "../DateContext";
+import { DateConsumerProps, DateContext } from "../DateContext";
 import { Header } from "../Header";
 import { Content } from "../Content";
 import { WeekContent } from "../WeekContent";
 import styles from "./styles.module.css";
 import "./index.css";
-import { displayTypeType } from "./types";
+import { displayTypeType, monthViewType } from "./types";
 
 export interface CalendarContainerProps {}
 
 export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
   const today = dayjs();
-  const [monthViewContext, setMonthViewContext] = useState({
+  const [monthViewContext, setMonthViewContext] = useState<monthViewType>({
     month: today.month() + 1,
     year: today.year(),
   });
@@ -20,10 +20,11 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
   const selectedDateState = useState(dayjs());
   const userSelectedState = useState(false);
   const { month, year } = monthViewContext;
-  const dateContextValue = {
+  const dateContextValue: DateConsumerProps = {
     selectedDateState,
     userSelectedState,
     displayTypeState: [displayType, setDisplayType],
+    monthViewState: [monthViewContext, setMonthViewContext],
   };
 
   return (
@@ -34,10 +35,6 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
           year={year}
           displayType={displayType}
           setDisplayType={setDisplayType}
-          setter={{
-            setMonthViewContext,
-            setSelectedDate: selectedDateState[1],
-          }}
         />
         <div className={styles.contentWrapper}>
           {displayType === "month" && <Content month={month} year={year} />}

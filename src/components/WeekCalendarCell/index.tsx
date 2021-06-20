@@ -11,7 +11,7 @@ export interface WeekCalendarCellProps {
 
 export const WeekCalendarCell: React.FC<WeekCalendarCellProps> = ({ date }) => {
   const textDate = date ? date.format("dddd, MMMM DD h A") : "";
-  const setDate = () => console.log();
+  const setDate = () => null;
   return (
     <div
       role="gridcell"
