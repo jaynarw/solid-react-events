@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { DateConsumerProps, DateContext } from "../DateContext";
 import { Header } from "../Header";
@@ -6,7 +6,7 @@ import { Content } from "../Content";
 import { WeekContent } from "../WeekContent";
 import styles from "./styles.module.css";
 import "./index.css";
-import { displayTypeType, monthViewType } from "./types";
+import { displayTypeType, monthViewType, eventType } from "./types";
 import { DayContent } from "../DayContent";
 
 export interface CalendarContainerProps {}
@@ -17,6 +17,7 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
     month: today.month() + 1,
     year: today.year(),
   });
+  const eventsState = useState<eventType[] | undefined>();
   const [displayType, setDisplayType] = useState<displayTypeType>("month");
   const selectedDateState = useState(dayjs());
   const userSelectedState = useState(false);
@@ -26,7 +27,16 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
     userSelectedState,
     displayTypeState: [displayType, setDisplayType],
     monthViewState: [monthViewContext, setMonthViewContext],
+    eventsState,
   };
+
+  const [, setEvents] = eventsState;
+
+  useEffect(() => {
+    fetch("/events.json")
+      .then((res) => res.json())
+      .then(setEvents);
+  }, []);
 
   return (
     <DateContext.Provider value={dateContextValue}>

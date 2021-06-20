@@ -31,7 +31,7 @@ module.exports = {
         // we want to force semicolons
         semi: ["error", "always"],
         // we use 2 spaces to indent our code
-        indent: ["error", 2, { SwitchCase: 1 }],
+        indent: ["warn", 2, { SwitchCase: 1 }],
         // we want to avoid useless spaces
         "react/prop-types": "off", // Since we do not use prop-types
 

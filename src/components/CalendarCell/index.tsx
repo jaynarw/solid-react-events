@@ -3,7 +3,9 @@ import React from "react";
 import cn from "classnames";
 import styles from "./styles.module.css";
 import { ContentProps } from "../Content";
+import { CalendarLabels } from "../CalendarLabels";
 import { DateConsumerProps } from "../DateContext";
+import { filterEventsIn, formatICS } from "../../eventsUtil";
 
 export interface CalendarCellProps {
   date: dayjs.Dayjs;
@@ -21,6 +23,7 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
   const {
     selectedDateState: [selectedDate, setSelectedDate],
     userSelectedState: [userSelected, setUserSelected],
+    eventsState: [events],
   } = dateContext;
   const isSelected = userSelected && selectedDate.isSame(date, "day");
   const setDate: () => void = () => {
@@ -56,10 +59,16 @@ export const CalendarCell: React.FC<CalendarCellProps> = ({
         >
           {date.date() === 1 ? date.format("DD MMM") : date.format("DD")}
         </div>
-        {/* <div>
-          <div className="mbsc-calendar-labels"></div>
-          <div className="mbsc-calendar-text mbsc-calendar-text-placeholder"></div>
-        </div> */}
+        <div>
+          {events && (
+            <CalendarLabels
+              events={formatICS(filterEventsIn(events, date, "day", true))}
+            />
+          )}
+          <div
+            className={cn(styles.calendarText, styles.calendarTextPlaceholder)}
+          />
+        </div>
       </div>
     </div>
   );

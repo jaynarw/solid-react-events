@@ -1,0 +1,70 @@
+.calendarLabels {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.calendarText {
+    display: block;
+    position: relative;
+    height: 1.6em;
+    line-height: 1.6em;
+    font-size: 0.625em;
+    white-space: nowrap;
+    margin: 0 0.1em 0.2em;
+}
+
+.calendarText.mbsc-ltr {
+    text-align: left;
+}
+
+.calendarText:focus {
+    outline: 0;
+}
+
+.calendarText:before {
+    border-radius: 0.2em;
+}
+
+.mbsc-calendar-width-md .calendarText {
+    height: 1.8em;
+    line-height: 1.8em;
+    margin: 0 0.4em 0.2em;
+}
+
+.mbsc-calendar-width-md .mbsc-calendar-text:before {
+    border-radius: 0.4em;
+}
+
+.calendarLabelBackground,
+.calendarText:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.2s;
+}
+
+.calendarLabelBackground {
+    background: currentColor;
+    border-radius: 0.2em;
+    opacity: 0.5;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.calendarLabelText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 2;
+    color: #000;
+    font-size: 1.2em;
+}
+
+.calendarLabelText {
+    font-weight: 600;
+    text-align: left;
+}

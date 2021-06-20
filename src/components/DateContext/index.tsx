@@ -1,6 +1,10 @@
 import dayjs from "dayjs";
 import React from "react";
-import { displayTypeType, monthViewType } from "../CalendarContainer/types";
+import {
+  displayTypeType,
+  monthViewType,
+  eventType,
+} from "../CalendarContainer/types";
 
 export type RealDateConsumerProps = {
   selectedDateState: [
@@ -15,6 +19,10 @@ export type RealDateConsumerProps = {
   monthViewState: [
     monthViewType,
     React.Dispatch<React.SetStateAction<monthViewType>>
+  ];
+  eventsState: [
+    eventType[] | undefined,
+    React.Dispatch<React.SetStateAction<eventType[] | undefined>>
   ];
 };
 export type DateConsumerProps = RealDateConsumerProps | null;
