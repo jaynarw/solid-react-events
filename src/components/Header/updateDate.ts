@@ -1,18 +1,21 @@
-import React from "react";
 import dayjs from "dayjs";
-import { displayTypeType, monthViewType } from "../CalendarContainer/types";
+import { RealDateConsumerProps } from "../DateContext";
 
-export default function updateDate(
-  month: number,
-  year: number,
-  setter: {
-    setMonthViewContext: React.Dispatch<React.SetStateAction<monthViewType>>;
-    setSelectedDate: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
-  },
-  displayType: displayTypeType,
-  updateType: "previous" | "next" | "today"
-) {
-  const { setMonthViewContext, setSelectedDate } = setter;
+export type updateTypeType = "previous" | "next" | "today";
+type HeaderActionProps = {
+  updateType: string;
+  monthViewState: RealDateConsumerProps["monthViewState"];
+  selectedDateState: RealDateConsumerProps["selectedDateState"];
+};
+
+const monthAction = ({
+  updateType,
+  monthViewState,
+  selectedDateState,
+}: HeaderActionProps) => {
+  const [{ month, year }, setMonthViewContext] = monthViewState;
+  const [, setSelectedDate] = selectedDateState;
+
   let updatedMonth = month;
   let updatedYear = year;
   let updatedDate = 1;
@@ -46,4 +49,49 @@ export default function updateDate(
   );
   setMonthViewContext({ year: updatedYear, month: updatedMonth });
   setSelectedDate(newDate);
+};
+
+const weekAction = ({
+  updateType,
+  monthViewState,
+  selectedDateState,
+}: HeaderActionProps) => {
+  const [selectedDate, setSelectedDate] = selectedDateState;
+  const [, setMonthViewContext] = monthViewState;
+  let newDate: dayjs.Dayjs;
+  // eslint-disable-next-line default-case
+  switch (updateType) {
+    case "previous":
+      newDate = selectedDate.add(-1, "week");
+      break;
+    case "next":
+      newDate = selectedDate.add(1, "week");
+      break;
+    case "today":
+      newDate = dayjs();
+      break;
+  }
+
+  setMonthViewContext({ year: newDate!.year(), month: newDate!.month() + 1 });
+  setSelectedDate(newDate!);
+};
+
+const dayAction = () => {};
+
+const actions = {
+  month: monthAction,
+  week: weekAction,
+  day: dayAction,
+};
+
+export default function updateDate(
+  updateType: updateTypeType,
+  CalendarStates: RealDateConsumerProps
+) {
+  const {
+    monthViewState,
+    selectedDateState,
+    displayTypeState: [displayType],
+  } = CalendarStates;
+  actions[displayType]({ updateType, monthViewState, selectedDateState });
 }

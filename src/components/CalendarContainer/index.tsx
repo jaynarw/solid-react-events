@@ -30,12 +30,7 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
   return (
     <DateContext.Provider value={dateContextValue}>
       <div className={styles.mainContainer}>
-        <Header
-          month={month}
-          year={year}
-          displayType={displayType}
-          setDisplayType={setDisplayType}
-        />
+        <Header />
         <div className={styles.contentWrapper}>
           {displayType === "month" && <Content month={month} year={year} />}
           {displayType === "week" && (
