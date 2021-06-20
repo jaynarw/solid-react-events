@@ -27,4 +27,5 @@
     border-left: 1px solid transparent;
     border-bottom: 1px solid transparent;
     display: table-cell;
+    font-weight: 300;
 }

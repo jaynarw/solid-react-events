@@ -53,9 +53,7 @@ export const WeekContent: React.FC<WeekContentProps> = ({ date }) => {
                 {day.slice(0, 3)}{" "}
                 {firstDayOfWeek
                   .add(index, "day")
-                  .format(
-                    `DD ${showMonth(firstDayOfWeek, index) ? "MMM" : ""}`
-                  )}
+                  .format(`D ${showMonth(firstDayOfWeek, index) ? "MMM" : ""}`)}
               </td>
             ))}
           </tr>

@@ -51,37 +51,33 @@ const monthAction = ({
   setSelectedDate(newDate);
 };
 
-const weekAction = ({
-  updateType,
-  monthViewState,
-  selectedDateState,
-}: HeaderActionProps) => {
-  const [selectedDate, setSelectedDate] = selectedDateState;
-  const [, setMonthViewContext] = monthViewState;
-  let newDate: dayjs.Dayjs;
-  // eslint-disable-next-line default-case
-  switch (updateType) {
-    case "previous":
-      newDate = selectedDate.add(-1, "week");
-      break;
-    case "next":
-      newDate = selectedDate.add(1, "week");
-      break;
-    case "today":
-      newDate = dayjs();
-      break;
-  }
+const weekAction =
+  (type: "day" | "week") =>
+  ({ updateType, monthViewState, selectedDateState }: HeaderActionProps) => {
+    const [selectedDate, setSelectedDate] = selectedDateState;
+    const [, setMonthViewContext] = monthViewState;
+    let newDate: dayjs.Dayjs;
+    // eslint-disable-next-line default-case
+    switch (updateType) {
+      case "previous":
+        newDate = selectedDate.add(-1, type);
+        break;
+      case "next":
+        newDate = selectedDate.add(1, type);
+        break;
+      case "today":
+        newDate = dayjs();
+        break;
+    }
 
-  setMonthViewContext({ year: newDate!.year(), month: newDate!.month() + 1 });
-  setSelectedDate(newDate!);
-};
-
-const dayAction = () => {};
+    setMonthViewContext({ year: newDate!.year(), month: newDate!.month() + 1 });
+    setSelectedDate(newDate!);
+  };
 
 const actions = {
   month: monthAction,
-  week: weekAction,
-  day: dayAction,
+  week: weekAction("week"),
+  day: weekAction("day"),
 };
 
 export default function updateDate(

@@ -31,7 +31,7 @@ export const WeekCalendarCell: React.FC<WeekCalendarCellProps> = ({ date }) => {
           className={cn(styles.calendarCellText)}
           style={{
             width: date && date.date() === 1 ? "auto" : undefined,
-            height: date ? "1.375em" : undefined,
+            height: date ? "2.875em" : undefined,
           }}
         />
         {/* <div>

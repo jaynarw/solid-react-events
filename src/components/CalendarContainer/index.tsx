@@ -7,6 +7,7 @@ import { WeekContent } from "../WeekContent";
 import styles from "./styles.module.css";
 import "./index.css";
 import { displayTypeType, monthViewType } from "./types";
+import { DayContent } from "../DayContent";
 
 export interface CalendarContainerProps {}
 
@@ -36,6 +37,7 @@ export const CalendarContainer: React.FC<CalendarContainerProps> = () => {
           {displayType === "week" && (
             <WeekContent date={selectedDateState[0]} />
           )}
+          {displayType === "day" && <DayContent date={selectedDateState[0]} />}
         </div>
       </div>
     </DateContext.Provider>

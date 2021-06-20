@@ -3,12 +3,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.headerWrapper>* {
+    flex-basis: 33.33%;
 }
 
 .buttonGroup {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    flex-grow: 1;
+    flex-basis: 1;
+}
+
+.headerWrapper>.buttonGroup {
+    justify-content: flex-end;
 }
 
 .tagButton {
@@ -22,4 +33,23 @@
 
 .tagButton:hover {
     color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.month {
+    font-weight: 700;
+}
+
+.year {
+    font-weight: 400;
+}
+
+.headerWrapper>.buttonGroup.center {
+    /* position: absolute; */
+    justify-content: center;
+}
+
+.weekdayText {
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 0.4em;
 }
