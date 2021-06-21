@@ -2,8 +2,6 @@ import dayjs from "dayjs";
 import React from "react";
 import cn from "classnames";
 import styles from "./styles.module.css";
-// import { ContentProps } from "../Content";
-// import { DateConsumerProps } from "../DateContext";
 
 export interface WeekCalendarCellProps {
   date?: dayjs.Dayjs;
