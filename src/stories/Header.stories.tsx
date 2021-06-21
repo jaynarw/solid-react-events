@@ -3,7 +3,7 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import { Header, HeaderProps } from "../components/Header";
+import { Header, HeaderProps } from "../lib/components/Header";
 
 export default {
   title: "shared/Header",

@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { ContentProps } from "../Content";
 import { CalendarLabels } from "../CalendarLabels";
 import { DateConsumerProps } from "../DateContext";
-import { filterEventsIn, formatICS } from "../../eventsUtil";
+import { filterEventsIn, formatICS } from "../eventsUtil";
 
 export interface CalendarCellProps {
   date: dayjs.Dayjs;

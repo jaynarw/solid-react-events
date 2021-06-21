@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import dayjs from "dayjs";
-import { eventType } from "./components/CalendarContainer/types";
+import { eventType } from "./CalendarContainer/types";
 
 export function normalizeDate(date: dayjs.Dayjs, toType: "day" | "hour") {
   if (toType === "day") {

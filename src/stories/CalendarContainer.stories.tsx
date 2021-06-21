@@ -6,7 +6,7 @@ import { Story, Meta } from "@storybook/react";
 import {
   CalendarContainer,
   CalendarContainerProps,
-} from "../components/CalendarContainer";
+} from "../lib/components/CalendarContainer";
 
 export default {
   title: "shared/CalendarContainer",
