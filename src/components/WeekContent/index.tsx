@@ -69,7 +69,7 @@ export const WeekContent: React.FC<WeekContentProps> = ({ date }) => {
               <td width="50px" className={styles.calendarCell}>
                 <span className={styles.hourText}>{hour}</span>
               </td>
-              {daysInWeek.map((day: string, index) => (
+              {daysInWeek.map((_: string, index) => (
                 <WeekCalendarCell
                   date={
                     hourIndex !== 0
