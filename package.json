@@ -66,6 +66,7 @@
         "babel-loader": "^8.2.2",
         "babel-preset-react-app": "^10.0.0",
         "classnames": "^2.3.1",
+        "css-loader": "^5.2.6",
         "dayjs": "^1.10.5",
         "eslint": "^7.28.0",
         "eslint-config-airbnb": "^18.2.1",
@@ -86,11 +87,14 @@
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-typescript2": "^0.30.0",
+        "style-loader": "^2.0.0",
         "typescript": "^4.1.2",
         "typescript-plugin-css-modules": "^3.4.0"
     },
     "author": "whiterose",
     "dependencies": {
-        "@storybook/addon-postcss": "^2.0.0"
+        "@storybook/addon-postcss": "^2.0.0",
+        "cssnano": "^5.0.6",
+        "rollup-plugin-terser": "^7.0.2"
     }
 }
