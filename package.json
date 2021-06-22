@@ -1,12 +1,12 @@
 {
     "name": "@whiterose/react-calendar",
     "version": "0.1.4",
-    "main": "build/index.js",
-    "module": "build/index.esm.js",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
     "files": [
-        "build"
+        "dist"
     ],
-    "types": "build/index.d.ts",
+    "types": "dist/index.d.ts",
     "description": "An ios like react event-calendar component",
     "license": "MIT",
     "repository": {
@@ -17,33 +17,34 @@
         "url": "https://github.com/jaynarw/solid-react-events/issues"
     },
     "scripts": {
+        "setup": "yarn install && yarn run build",
+        "dev": "yarn run watch",
+        "prebuild": "rm -rf dist",
         "build": "rollup -c",
+        "watch": "rollup -c -w",
         "test": "jest",
         "test:watch": "jest --watch",
-        "generate": "node ./util/create-component",
+        "lint:fix": "eslint . --fix",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook",
-        "prepublishOnly": "npm run build"
+        "build-storybook": "build-storybook"
     },
     "peerDependencies": {
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
+        "react": ">=17.0.1",
+        "react-dom": ">=17.0.1"
     },
     "eslintConfig": {
         "extends": [
             "react-app",
             "react-app/jest"
         ],
-        "overrides": [
-            {
-                "files": [
-                    "**/*.stories.*"
-                ],
-                "rules": {
-                    "import/no-anonymous-default-export": "off"
-                }
+        "overrides": [{
+            "files": [
+                "**/*.stories.*"
+            ],
+            "rules": {
+                "import/no-anonymous-default-export": "off"
             }
-        ]
+        }]
     },
     "devDependencies": {
         "@babel/core": "^7.14.6",
@@ -52,22 +53,12 @@
         "@storybook/addon-actions": "^6.2.9",
         "@storybook/addon-essentials": "^6.2.9",
         "@storybook/addon-links": "^6.2.9",
-        "@storybook/addon-postcss": "^2.0.0",
         "@storybook/react": "^6.2.9",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.1.0",
-        "@testing-library/user-event": "^12.1.10",
-        "@types/jest": "^26.0.15",
-        "@types/node": "^12.0.0",
-        "@types/react": "^17.0.0",
-        "@types/react-dom": "^17.0.0",
         "@typescript-eslint/eslint-plugin": "^4.27.0",
         "@typescript-eslint/parser": "^4.27.0",
         "autoprefixer": "^10.2.6",
         "babel-loader": "^8.2.2",
-        "babel-preset-react-app": "^10.0.0",
         "classnames": "^2.3.1",
-        "css-loader": "^5.2.6",
         "cssnano": "^5.0.6",
         "dayjs": "^1.10.5",
         "eslint": "^7.28.0",
@@ -79,23 +70,16 @@
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.2.0",
         "postcss": "^8.3.5",
-        "postcss-flexbugs-fixes": "^5.0.2",
         "prettier": "^2.3.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-icons": "^4.2.0",
-        "rollup": "^2.52.2",
-        "rollup-plugin-copy": "^3.4.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-typescript2": "^0.30.0",
-        "style-loader": "^2.0.0",
-        "typescript": "^4.1.2",
-        "typescript-plugin-css-modules": "^3.4.0"
+        "storybook-css-modules-preset": "^1.1.1",
+        "typescript": "4.2.2"
     },
-    "author": "whiterose",
-    "dependencies": {
-        "rollup-plugin-dts": "^3.0.2"
-    }
+    "author": "whiterose"
 }

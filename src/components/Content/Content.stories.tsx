@@ -3,7 +3,7 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import { Content, ContentProps } from "../lib/components/Content";
+import { Content, ContentProps } from ".";
 
 export default {
   title: "shared/Content",

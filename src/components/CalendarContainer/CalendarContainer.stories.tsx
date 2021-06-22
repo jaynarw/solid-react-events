@@ -3,10 +3,7 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import {
-  CalendarContainer,
-  CalendarContainerProps,
-} from "../lib/components/CalendarContainer";
+import { CalendarContainer, CalendarContainerProps } from ".";
 
 export default {
   title: "shared/CalendarContainer",
@@ -14,7 +11,7 @@ export default {
 } as Meta;
 
 const Template: Story<CalendarContainerProps> = (args) => (
-  <div style={{ height: "100vh", width: "100vw" }}>
+  <div style={{ height: "100%", width: "100%" }}>
     <CalendarContainer {...args} />
   </div>
 );
