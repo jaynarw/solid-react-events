@@ -1,6 +1,6 @@
 {
-    "name": "react-events-calendar",
-    "version": "0.1.0",
+    "name": "@whiterose/react-calendar",
+    "version": "0.1.1",
     "main": "build/index.js",
     "module": "build/index.esm.js",
     "files": [
@@ -52,6 +52,7 @@
         "@storybook/addon-actions": "^6.2.9",
         "@storybook/addon-essentials": "^6.2.9",
         "@storybook/addon-links": "^6.2.9",
+        "@storybook/addon-postcss": "^2.0.0",
         "@storybook/react": "^6.2.9",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
@@ -67,6 +68,7 @@
         "babel-preset-react-app": "^10.0.0",
         "classnames": "^2.3.1",
         "css-loader": "^5.2.6",
+        "cssnano": "^5.0.6",
         "dayjs": "^1.10.5",
         "eslint": "^7.28.0",
         "eslint-config-airbnb": "^18.2.1",
@@ -86,15 +88,11 @@
         "rollup-plugin-copy": "^3.4.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-postcss": "^4.0.0",
+        "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-typescript2": "^0.30.0",
         "style-loader": "^2.0.0",
         "typescript": "^4.1.2",
         "typescript-plugin-css-modules": "^3.4.0"
     },
-    "author": "whiterose",
-    "dependencies": {
-        "@storybook/addon-postcss": "^2.0.0",
-        "cssnano": "^5.0.6",
-        "rollup-plugin-terser": "^7.0.2"
-    }
+    "author": "whiterose"
 }
