@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
+import cleaner from 'rollup-plugin-cleaner';
 
 export default [{
     input: [
@@ -17,6 +18,9 @@ export default [{
         sourcemap: true,
     }, ],
     plugins: [
+        cleaner({
+            targets: ["./dist"]
+        }),
         peerDepsExternal(),
         resolve(),
         commonjs(),
